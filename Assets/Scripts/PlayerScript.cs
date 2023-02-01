@@ -20,11 +20,13 @@ public class PlayerScript : MonoBehaviour
     public Text score;
     public Text hiscore;
     private int currentscore;
+    //private int currenthiscore;
     public int maxhealth;
     private int currenthealth;
     private Rigidbody2D rb;
     private Vector2 move;
     public float bulletspeed;
+    
     //private float fire;
     //private float timer;
     //public float firedelay;
@@ -40,8 +42,10 @@ public class PlayerScript : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         currenthealth = maxhealth;
+        currentscore = 0;
         score.text = "SCORE: " + currentscore.ToString();
-        hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore",0).ToString();
+        PlayerPrefs.SetInt("Hiscore",0);
+        hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore").ToString();
         //bulletsonscreen = 0;
         //holdfire = false;
     }
@@ -94,6 +98,7 @@ public class PlayerScript : MonoBehaviour
 
     public void ChangeHealth(int amount) {
         Debug.Log("OUCH!!");
+         
     }
 
     public void ChangeScore(int scorechange) {
@@ -101,11 +106,16 @@ public class PlayerScript : MonoBehaviour
         //    SCORECHART
         // 100 Per Body Part
         // 50 Per Barrier
-        if (currentscore > PlayerPrefs.GetInt("Hiscore",0)) {
-            hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore",currentscore).ToString();
+        if (currentscore >= PlayerPrefs.GetInt("Hiscore",0)) {
+            ChangeHiScore();
         }
-        score.text = "Score: " + currentscore.ToString();
+        score.text = "SCORE: " + currentscore.ToString();
         
+        
+    }
+    void ChangeHiScore() {
+        PlayerPrefs.SetInt("Hiscore",currentscore);
+        hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore").ToString();
     }
 
    /**

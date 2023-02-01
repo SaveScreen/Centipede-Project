@@ -135,7 +135,10 @@ public class EnemyScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
         PlayerScript p = other.gameObject.GetComponent<PlayerScript>();
-        p.ChangeHealth(-1);
+        if (p != null) {
+            p.ChangeHealth(-1);
+        }
+        
     }
 
     public void Destroyed() {
