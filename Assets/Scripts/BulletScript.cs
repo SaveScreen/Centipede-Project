@@ -20,8 +20,14 @@ public class BulletScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
         EnemyScript enemy = other.collider.GetComponent<EnemyScript>();
+        BarrierScript barrier = other.collider.GetComponent<BarrierScript>();
+
         if (enemy != null) {
             enemy.Destroyed();
+        }
+        if (barrier != null)
+        {
+            barrier.ChangeHealth(-1);
         }
     
         //Bullet destroys itself once it hits an enemy
@@ -33,7 +39,7 @@ public class BulletScript : MonoBehaviour
     void Update()
     {
         //Bullet destroys itself once it goes off screen
-        if (transform.position.magnitude > 1000.0f) {
+        if (transform.position.magnitude > 500.0f) {
             Destroy(gameObject);
         }
     }
