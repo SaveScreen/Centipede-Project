@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec6442a96eaff8347953e72377bac518
+guid: 3a2cf809a92319347b55fda4274fb89c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -167,13 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Owl_0
+      name: Dragon 1_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 56
-        width: 39
-        height: 42
+        x: 31
+        y: 57
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b082a5861b7fe6a40b07592bd5324f79
-      internalID: 971693379
+      spriteID: 84d07597d443a734c8a2c08e992255ae
+      internalID: 846536656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Owl_1
+      name: Dragon 1_5
       rect:
         serializedVersion: 2
         x: 31
-        y: 3
-        width: 39
-        height: 42
+        y: 21
+        width: 20
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,8 +202,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c76a8f9c04ccb9443b79188f6a8942e8
-      internalID: -962019515
+      spriteID: 32696fe0c5cde6d439cde3f429afda6c
+      internalID: -1617681330
       vertices: []
       indices: 
       edges: []
@@ -219,8 +219,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Owl_0: 971693379
-      Owl_1: -962019515
+      Dragon 1_2: 912818818
+      Dragon 1_5: -1617681330
+      Dragon 1_3: -1005380578
+      Dragon 1_6: -224406653
+      Dragon 1_7: 815837418
+      Dragon 1_1: 846536656
+      Dragon 1_0: 525433674
+      Dragon 1_4: 1668309524
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

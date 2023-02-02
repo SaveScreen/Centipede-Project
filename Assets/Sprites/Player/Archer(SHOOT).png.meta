@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec6442a96eaff8347953e72377bac518
+guid: 0fcb1926fc88f7d419a087d43bff2eed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,10 +46,10 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.2648949, y: 0.7164085}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 9, y: 55, z: 55, w: 9}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -167,43 +167,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Owl_0
+      name: Archer_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 56
-        width: 39
-        height: 42
+        x: 18
+        y: 57
+        width: 26
+        height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b082a5861b7fe6a40b07592bd5324f79
-      internalID: 971693379
+      spriteID: 5e1d19b65bcfb724cac10961a6258d57
+      internalID: -981707422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Owl_1
+      name: Archer_1
       rect:
         serializedVersion: 2
-        x: 31
-        y: 3
-        width: 39
-        height: 42
+        x: 56
+        y: 57
+        width: 26
+        height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c76a8f9c04ccb9443b79188f6a8942e8
-      internalID: -962019515
+      spriteID: 8ed7b900adcf5404f9a626854fca8d9b
+      internalID: -1676529019
       vertices: []
       indices: 
       edges: []
@@ -212,15 +212,17 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Owl_0: 971693379
-      Owl_1: -962019515
+      Archer_3: -1794149142
+      Archer_1: -1676529019
+      Archer_0: -981707422
+      Archer_2: 167322350
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec6442a96eaff8347953e72377bac518
+guid: ab3478d1e49ce044e989a8d4ada1253f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -167,13 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Owl_0
+      name: Dragon 2_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 56
-        width: 39
-        height: 42
+        x: 52
+        y: 62
+        width: 19
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b082a5861b7fe6a40b07592bd5324f79
-      internalID: 971693379
+      spriteID: 383f80dc16ea59b40b6a3277ecf57675
+      internalID: 531982824
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Owl_1
+      name: Dragon 2_6
       rect:
         serializedVersion: 2
-        x: 31
-        y: 3
-        width: 39
-        height: 42
+        x: 52
+        y: 25
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,8 +202,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c76a8f9c04ccb9443b79188f6a8942e8
-      internalID: -962019515
+      spriteID: 97a4f81fe3d3fd24da3b4f015bf80cc5
+      internalID: 49615359
       vertices: []
       indices: 
       edges: []
@@ -219,8 +219,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Owl_0: 971693379
-      Owl_1: -962019515
+      Dragon 2_5: -1021504961
+      Dragon 2_2: 531982824
+      Dragon 2_3: -1973437991
+      Dragon 2_6: 49615359
+      Dragon 2_0: -1440344459
+      Dragon 2_4: 305531123
+      Dragon 2_1: 1063899781
+      Dragon 2_7: 1855642899
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
