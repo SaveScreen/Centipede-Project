@@ -17,9 +17,7 @@ public class PlayerScript : MonoBehaviour
     //CONTROLS PLAYER FIRING
     
     public GameObject arrow;
-    public Text score;
-    public Text hiscore;
-    private int currentscore;
+   
     //private int currenthiscore;
     public int maxhealth;
     private int currenthealth;
@@ -30,14 +28,13 @@ public class PlayerScript : MonoBehaviour
     public int enemytotal;
     private GameObject game;
     private GameController gamecontrol;
-    
-    //private float fire;
+    private EnemyScript enemy;
+    private AudioSource sounds;
+    public AudioClip hurt;
+    private SpriteRenderer r;
     //private float timer;
-    //public float firedelay;
-    //Determines how many bullets on screen
-    //private int bulletsonscreen;
-    //stops fireing when set to True
-    //private bool holdfire;
+    
+   
 
     //GOT THE MOVEMENT WORKING
    
@@ -48,14 +45,15 @@ public class PlayerScript : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         game = GameObject.FindWithTag("GameController");
         gamecontrol = game.GetComponent<GameController>();
+        sounds = gameObject.GetComponent<AudioSource>();
+        r = gameObject.GetComponent<SpriteRenderer>();
+        GameObject enemytag = GameObject.FindWithTag("Enemy");
+        enemy = enemytag.GetComponent<EnemyScript>();
         currenthealth = maxhealth;
-        currentscore = 0;
         enemytotal = 10;
-        score.text = "SCORE: " + currentscore.ToString();
-        PlayerPrefs.SetInt("Hiscore",0);
-        hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore").ToString();
-        //bulletsonscreen = 0;
-        //holdfire = false;
+        //timer = 0.0f;
+        //timeuntilreset = 3.0f;
+        
     }
 
     void OnEnable() {
@@ -68,30 +66,35 @@ public class PlayerScript : MonoBehaviour
     }
 
     void Update() {
-        move = PlayerController.ReadValue<Vector2>();
-        //fire = PlayerFire.ReadValue<float>();
+        //if not dead, move player and stuff
+            move = PlayerController.ReadValue<Vector2>();
+            //fire = PlayerFire.ReadValue<float>();
 
-        
-        //Restarts the game
-        if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene("Level1");
             
-        }
+            //Restarts the game
+            if (Input.GetKeyDown(KeyCode.R)) {
+                //SceneManager.LoadScene("Level1");
+                SceneManager.GetActiveScene();
+            }
 
-        //For debug purposes. Exits the game
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            Application.Quit();
-        }
+            //For debug purposes. Exits the game
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
 
-        //For firing arrows
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            Bullets();
-            anim.SetBool("Shooting",true);
-        } else {
-            anim.SetBool("Shooting",false);
-        }
-       
-
+            //For firing arrows
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                Bullets();
+                anim.SetBool("Shooting",true);
+            } else {
+                anim.SetBool("Shooting",false);
+            }
+            
+            //Go to next level
+            if (enemytotal < 1) {
+                gamecontrol.ChangeLevel(1);
+            }
+        
         
     }
 
@@ -114,28 +117,11 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void ChangeHealth(int amount) {
-        Debug.Log("OUCH!!");
-         
+        currenthealth += amount;
     }
 
-    public void ChangeScore(int scorechange) {
-        currentscore += scorechange;
-        if (enemytotal <= 0) {
-            gamecontrol.ChangeLevel(1);
-        }
-        //    SCORECHART
-        // 100 Per Body Part
-        // 50 Per Barrier
-        if (currentscore >= PlayerPrefs.GetInt("Hiscore",0)) {
-            ChangeHiScore();
-        }
-        score.text = "SCORE: " + currentscore.ToString();
-        
-        
-    }
-    void ChangeHiScore() {
-        PlayerPrefs.SetInt("Hiscore",currentscore);
-        hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore").ToString();
+    public void PlaySound(AudioClip sound) {
+        sounds.PlayOneShot(sound);
     }
 
    /**

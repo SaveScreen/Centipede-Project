@@ -13,6 +13,11 @@ public class EnemyScript : MonoBehaviour
     private float timer;
     private PlayerScript player;
     private SpriteRenderer enemydirection;
+    public AudioClip hitdragon;
+    public AudioClip dragonroar;
+    private float soundtimer;
+    private float timeuntilsound;
+    private GameController g;
     
 
 
@@ -24,9 +29,43 @@ public class EnemyScript : MonoBehaviour
         enemydirection.flipX = true;
         phase = 0;
         timer = 0.0f;
+        soundtimer = 0.0f;
+        timeuntilsound = 0.5f;
         goingdown = true;
         GameObject playertag = GameObject.FindWithTag("Player");
         player = playertag.GetComponent<PlayerScript>();
+        GameObject gctag = GameObject.FindWithTag("GameController");
+        g = gctag.GetComponent<GameController>();
+        if (g.stage >= 2) {
+            speed = 0.01f;
+        }
+        if (g.stage >= 5) {
+            speed = 0.0125f;
+        }
+        if (g.stage >= 10) {
+            speed = 0.015f;
+        }
+        if (g.stage >= 15) {
+            speed = 0.017f;
+        }
+        if (g.stage >= 20) {
+            speed = 0.025f;
+        }
+        if (g.stage >= 25) {
+            speed = 0.03f;
+        }
+        if (g.stage >= 32) {
+            speed = 0.045f;
+        }
+        if (g.stage >= 50) {
+            speed = 0.07f;
+        }
+        if (g.stage >= 75) {
+            speed = 0.1f;
+        }
+        if (g.stage >= 100) {
+            speed = 0.25f;
+        }
     }
 
     // Update is called once per frame
@@ -138,6 +177,22 @@ public class EnemyScript : MonoBehaviour
                     phase = 0;
                 }
         }
+
+        //For dragon sounds
+        soundtimer += Time.deltaTime;
+        if (soundtimer >= timeuntilsound) {
+           player.PlaySound(dragonroar);
+            soundtimer = 0.0f;
+            timeuntilsound = 10.0f; 
+        }
+        
+        
+        /*
+        if (soundtimer >= timeuntilsound) {
+            player.PlaySound(dragonroar);
+            soundtimer = 0.0f;
+        }
+        */
        
     }
 
@@ -157,8 +212,9 @@ public class EnemyScript : MonoBehaviour
     }
 
     public void Destroyed() {
-        player.ChangeScore(100);
+        g.ChangeScore(100);
         player.enemytotal -= 1;
+        player.PlaySound(hitdragon);
         Destroy(gameObject);
     }
 
@@ -181,5 +237,9 @@ public class EnemyScript : MonoBehaviour
             }
            
         }
+    }
+
+    public void DestroyForRestart() {
+        Destroy(gameObject);
     }
 }

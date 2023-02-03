@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4018621200169423128}
   - component: {fileID: 4018621200169423125}
   - component: {fileID: 4018621200169423130}
+  - component: {fileID: 9069387138816618706}
   m_Layer: 0
   m_Name: Barrier
   m_TagString: Barrier
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4018621200169423128
 SpriteRenderer:
@@ -124,3 +125,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af973339b68b3142a3d3740a54ec12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrierhit: {fileID: 8300000, guid: fae220af39b87c743bd441217cdb1bfc, type: 3}
+--- !u!95 &9069387138816618706
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4018621200169423129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 626161716a0e7764aaf57781b44209a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
