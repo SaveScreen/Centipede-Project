@@ -26,6 +26,10 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 move;
     public float bulletspeed;
+    private Animator anim;
+    public int enemytotal;
+    private GameObject game;
+    private GameController gamecontrol;
     
     //private float fire;
     //private float timer;
@@ -41,8 +45,12 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        anim = gameObject.GetComponent<Animator>();
+        game = GameObject.FindWithTag("GameController");
+        gamecontrol = game.GetComponent<GameController>();
         currenthealth = maxhealth;
         currentscore = 0;
+        enemytotal = 10;
         score.text = "SCORE: " + currentscore.ToString();
         PlayerPrefs.SetInt("Hiscore",0);
         hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore").ToString();
@@ -63,9 +71,11 @@ public class PlayerScript : MonoBehaviour
         move = PlayerController.ReadValue<Vector2>();
         //fire = PlayerFire.ReadValue<float>();
 
+        
         //Restarts the game
         if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level1");
+            
         }
 
         //For debug purposes. Exits the game
@@ -76,7 +86,13 @@ public class PlayerScript : MonoBehaviour
         //For firing arrows
         if (Input.GetKeyDown(KeyCode.Q)) {
             Bullets();
+            anim.SetBool("Shooting",true);
+        } else {
+            anim.SetBool("Shooting",false);
         }
+       
+
+        
     }
 
     
@@ -94,6 +110,7 @@ public class PlayerScript : MonoBehaviour
 
         bullet.FireBullet(Vector2.up, bulletspeed);
         
+        
     }
 
     public void ChangeHealth(int amount) {
@@ -103,6 +120,9 @@ public class PlayerScript : MonoBehaviour
 
     public void ChangeScore(int scorechange) {
         currentscore += scorechange;
+        if (enemytotal <= 0) {
+            gamecontrol.ChangeLevel(1);
+        }
         //    SCORECHART
         // 100 Per Body Part
         // 50 Per Barrier
