@@ -21,6 +21,7 @@ public class BulletScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         EnemyScript enemy = other.collider.GetComponent<EnemyScript>();
         BarrierScript barrier = other.collider.GetComponent<BarrierScript>();
+        LionScript lion = other.collider.GetComponent<LionScript>();
 
         if (enemy != null) {
             enemy.Destroyed();
@@ -28,6 +29,9 @@ public class BulletScript : MonoBehaviour
         if (barrier != null)
         {
             barrier.ChangeHealth(-1);
+        }
+        if (lion != null) {
+            lion.Destroyed();
         }
     
         //Bullet destroys itself once it hits an enemy

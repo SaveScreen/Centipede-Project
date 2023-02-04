@@ -15,9 +15,11 @@ public class EnemyScript : MonoBehaviour
     private SpriteRenderer enemydirection;
     public AudioClip hitdragon;
     public AudioClip dragonroar;
+    public AudioClip playerhurt;
     private float soundtimer;
     private float timeuntilsound;
     private GameController g;
+    
     
 
 
@@ -46,7 +48,7 @@ public class EnemyScript : MonoBehaviour
             speed = 0.015f;
         }
         if (g.stage >= 15) {
-            speed = 0.017f;
+            speed = 0.02f;
         }
         if (g.stage >= 20) {
             speed = 0.025f;
@@ -54,7 +56,7 @@ public class EnemyScript : MonoBehaviour
         if (g.stage >= 25) {
             speed = 0.03f;
         }
-        if (g.stage >= 32) {
+        if (g.stage >= 35) {
             speed = 0.045f;
         }
         if (g.stage >= 50) {
@@ -185,14 +187,6 @@ public class EnemyScript : MonoBehaviour
             soundtimer = 0.0f;
             timeuntilsound = 10.0f; 
         }
-        
-        
-        /*
-        if (soundtimer >= timeuntilsound) {
-            player.PlaySound(dragonroar);
-            soundtimer = 0.0f;
-        }
-        */
        
     }
 
@@ -201,7 +195,11 @@ public class EnemyScript : MonoBehaviour
         //Collision with Player
         PlayerScript p = other.gameObject.GetComponent<PlayerScript>();
         if (p != null) {
-            p.ChangeHealth(-1);
+            g.ChangeHealth(-1);
+            p.PlaySound(playerhurt);
+            g.enemytotal -= 1;
+            g.RestartLevel();
+            Destroy(gameObject);
         }
 
         //Collision with Barriers
@@ -213,7 +211,7 @@ public class EnemyScript : MonoBehaviour
 
     public void Destroyed() {
         g.ChangeScore(100);
-        player.enemytotal -= 1;
+        g.enemytotal -= 1;
         player.PlaySound(hitdragon);
         Destroy(gameObject);
     }
@@ -239,7 +237,4 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    public void DestroyForRestart() {
-        Destroy(gameObject);
-    }
 }

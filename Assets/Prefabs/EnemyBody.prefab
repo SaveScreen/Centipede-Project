@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6589474275286881549}
   - component: {fileID: 8055086460820458009}
   - component: {fileID: 1432548623932597486}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: EnemyBody
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6619717012930944065
 SpriteRenderer:
@@ -103,6 +103,7 @@ MonoBehaviour:
   timeuntilnext: 0.1
   hitdragon: {fileID: 8300000, guid: 4db3584d2c9040143b7caa1f67fe2346, type: 3}
   dragonroar: {fileID: 0}
+  playerhurt: {fileID: 8300000, guid: 8dbc06b33041291489474963e3e92b1d, type: 3}
 --- !u!50 &8055086460820458009
 Rigidbody2D:
   serializedVersion: 4
