@@ -9,8 +9,6 @@ public class EnemyScript : MonoBehaviour
     private Vector2 enemymovement;
     private int phase;
     private bool goingdown;
-    public float timeuntilnext;
-    private float timer;
     private PlayerScript player;
     private SpriteRenderer enemydirection;
     public AudioClip hitdragon;
@@ -19,6 +17,9 @@ public class EnemyScript : MonoBehaviour
     private float soundtimer;
     private float timeuntilsound;
     private GameController g;
+    private Vector2 coords;
+    private float newx;
+    private float newy;
     
     
 
@@ -29,8 +30,9 @@ public class EnemyScript : MonoBehaviour
     {
         enemydirection = gameObject.GetComponent<SpriteRenderer>();
         enemydirection.flipX = true;
+        speed = 4.0f;
         phase = 0;
-        timer = 0.0f;
+        
         soundtimer = 0.0f;
         timeuntilsound = 0.5f;
         goingdown = true;
@@ -38,42 +40,135 @@ public class EnemyScript : MonoBehaviour
         player = playertag.GetComponent<PlayerScript>();
         GameObject gctag = GameObject.FindWithTag("GameController");
         g = gctag.GetComponent<GameController>();
+        
         if (g.stage >= 2) {
-            speed = 0.01f;
+            speed = 4;
         }
         if (g.stage >= 5) {
-            speed = 0.0125f;
+            speed = 5;
         }
         if (g.stage >= 10) {
-            speed = 0.015f;
+            speed = 7;
         }
         if (g.stage >= 15) {
-            speed = 0.02f;
+            speed = 10;
         }
         if (g.stage >= 20) {
-            speed = 0.025f;
+            speed = 13;
         }
         if (g.stage >= 25) {
-            speed = 0.03f;
+            speed = 15;
         }
         if (g.stage >= 35) {
-            speed = 0.045f;
+            speed = 20;
         }
         if (g.stage >= 50) {
-            speed = 0.07f;
+            speed = 25;
         }
         if (g.stage >= 75) {
-            speed = 0.1f;
+            speed = 30;
         }
         if (g.stage >= 100) {
-            speed = 0.25f;
+            speed = 40;
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (goingdown == true) {
+            if (transform.position.y >= -12.0f) {
+                //Going right
+                if (phase == 0) {
+                    newx = 12.0f;
+                    enemydirection.flipX = true;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(newx,transform.position.y), speed * Time.deltaTime);
+                    if (transform.position.x >= 12.0f) {
+                        phase += 1;
+                        newy = transform.position.y - 1.0f;
+                    }
+                }
+                //Going down
+                if (phase == 1) {
+                    enemydirection.flipX = true;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(transform.position.x,newy), speed * Time.deltaTime);
+                    if (transform.position.y <= coords.y) {
+                        phase += 1;
+                        newx = -12.0f;
+                    }
+                }
+                //Going left
+                if (phase == 2) {
+                    enemydirection.flipX = false;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(newx,transform.position.y), speed * Time.deltaTime);
+                    if (transform.position.x <= coords.x) {
+                        phase += 1;
+                        newy = transform.position.y - 1.0f;
+                    }
+                }
+                //Going down again
+                if (phase == 3) {
+                    enemydirection.flipX = false;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(transform.position.x,newy), speed * Time.deltaTime);
+                    if (transform.position.y <= coords.y) {
+                        phase = 0;
+                    }
+                }
+            } else {
+                phase = 0;
+                goingdown = false;
+            }
+            
+        }
+        if (goingdown == false) {
+            if (transform.position.y <= 12.0f) {
+                //Going left
+                if (phase == 0) {
+                    newx = -12.0f;
+                    enemydirection.flipX = false;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(newx,transform.position.y), speed * Time.deltaTime);
+                    if (transform.position.x <= -12.0f) {
+                        phase += 1;
+                        newy = transform.position.y + 1.0f;
+                    }
+                }
+                //Going up
+                if (phase == 1) {
+                    enemydirection.flipX = false;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(transform.position.x,newy), speed * Time.deltaTime);
+                    if (transform.position.y >= coords.y) {
+                        phase += 1;
+                        newx = 12.0f;
+                    }
+                }
+                //Going right
+                if (phase == 2) {
+                    enemydirection.flipX = true;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(newx,transform.position.y), speed * Time.deltaTime);
+                    if (transform.position.x >= coords.x) {
+                        phase += 1;
+                        newy = transform.position.y + 1.0f;
+                    }
+                }
+                //Going up again
+                if (phase == 3) {
+                    enemydirection.flipX = true;
+                    transform.position = Vector2.MoveTowards(transform.position, coords = new Vector2(transform.position.x,newy), speed * Time.deltaTime);
+                    if (transform.position.y >= coords.y) {
+                        phase = 0;
+                    }
+                }
+            } else {
+                phase = 0;
+                goingdown = true;
+            }
+            
+        }
+
+        //OLD DRAGON PATH AI
+        /****************************************************************************************************************
         if (goingdown == true) {
             if (transform.position.y >= -12.25) {
                 //Phase 0 is going right
@@ -125,6 +220,7 @@ public class EnemyScript : MonoBehaviour
                 goingdown = false;
                 phase = 0;
             }
+            
              
         }
         else if (goingdown == false) {
@@ -179,6 +275,9 @@ public class EnemyScript : MonoBehaviour
                     phase = 0;
                 }
         }
+        ****************************************************************************************************/
+
+
 
         //For dragon sounds
         soundtimer += Time.deltaTime;
@@ -197,7 +296,6 @@ public class EnemyScript : MonoBehaviour
         if (p != null) {
             g.ChangeHealth(-1);
             p.PlaySound(playerhurt);
-            g.enemytotal -= 1;
             g.RestartLevel();
             Destroy(gameObject);
         }
@@ -220,21 +318,45 @@ public class EnemyScript : MonoBehaviour
         if (goingdown == true) {
             if (phase == 0) {
                 phase = 1;
+                newy = transform.position.y - 1.0f;
+            }
+            if (phase == 1) {
+                phase = 3;
+                newy = transform.position.y - 1.0f;
             }
             if (phase == 2) {
                 phase = 3;
+                newy = transform.position.y - 1.0f;
+
+            }
+            if (phase == 3) {
+                phase = 1;
+                newy = transform.position.y - 1.0f;
             }
         }
         if (goingdown == false) {
             if (phase == 0) {
                 phase = 1;
+                newy = transform.position.y + 1.0f;
             }
             
+            if (phase == 1) {
+                phase = 3;
+                newy = transform.position.y + 1.0f;
+            }
             if (phase == 2) {
                 phase = 3;
+                newy = transform.position.y + 1.0f;
+            }
+            if (phase == 3) {
+                phase = 1;
+                newy = transform.position.y + 1.0f;
             }
            
         }
     }
 
+    public void DestroyForRestart() {
+        Destroy(gameObject);
+    }
 }

@@ -12,7 +12,10 @@ public class GameController : MonoBehaviour
     public static GameController game;
     public GameObject levelbg1;
     public GameObject levelbg2;
-    public GameObject wholedragon;
+    public GameObject dragonshead;
+    public GameObject dragonsleg;
+    public GameObject dragonsbody;
+    public GameObject dragonstail;
     public GameObject lion;
     private LionScript l;
     public GameObject gameoverui;
@@ -20,7 +23,7 @@ public class GameController : MonoBehaviour
     private PlayerScript p;
     public BarrierSpawning bs;
     public Text stageui;
-    private EnemyScript e;
+    private EnemyScript d;
     private GameObject dragon;
     public GameObject life1;
     public GameObject life2;
@@ -42,6 +45,9 @@ public class GameController : MonoBehaviour
     public int enemytotal;
     private float liontimer;
     private float timeforlion;
+    public AudioClip gameoversound;
+    private AudioSource sounds;
+    private bool gameover;
     //private GameObject player;
     // Start is called before the first frame update
 
@@ -51,9 +57,10 @@ public class GameController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         p = player.GetComponent<PlayerScript>();
         dragon = GameObject.FindWithTag("Enemy");
-        e = dragon.GetComponent<EnemyScript>(); 
+        d = dragon.GetComponent<EnemyScript>(); 
         GameObject liontag = GameObject.FindWithTag("Lion");
         l = liontag.GetComponent<LionScript>();
+        sounds = gameObject.GetComponent<AudioSource>();
         stage = 1;
         levelbg2.SetActive(false);
         levelbg1.SetActive(true);
@@ -72,6 +79,8 @@ public class GameController : MonoBehaviour
         enemytotal = 10;
         liontimer = 0.0f;
         timeforlion = 20.0f;
+        gameover = false;
+        
 
         //Lifecount at start of game
         life1.SetActive(true);
@@ -97,11 +106,22 @@ public class GameController : MonoBehaviour
         }
         stageui.text = "STAGE: " + stage.ToString();
 
-        if (currenthealth <= 0) {
-            player.SetActive(false);
-            wholedragon.SetActive(false);
-            gameoverui.SetActive(true);
+        //GAME OVER
+        if (gameover == false) {
+            if (currenthealth <= 0) {
+                player.SetActive(false);
+                gameoverui.SetActive(true);
+                GameObject[] dragonparts;
+                dragonparts = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (GameObject drag in dragonparts) {
+                    drag.SetActive(false);
+                }
+                lion.SetActive(false);
+                PlaySound(gameoversound);
+                gameover = true;
+            }
         }
+        
 
          //Go to next level
         if (enemytotal < 1) {
@@ -115,21 +135,32 @@ public class GameController : MonoBehaviour
             liontimer = 0.0f;
         }
 
+
+       
+
     }
 
 
     public void ChangeLevel(int level) {
         stage += level;
         ChangeScore(1000);
-        bs.amount = 10;
+        bs.amount = 5;
         bs.Generate();
         CreateDragon();
     }
 
 
     void CreateDragon() {
-        Instantiate(wholedragon,new Vector2(-2.75f,11.5f),Quaternion.identity);
-        
+        Instantiate(dragonshead,new Vector2(-2.75f,11),Quaternion.identity);
+        Instantiate(dragonsleg,new Vector2(-3.75f,11),Quaternion.identity);
+        Instantiate(dragonsbody,new Vector2(-4.75f,11),Quaternion.identity);
+        Instantiate(dragonsbody,new Vector2(-5.75f,11),Quaternion.identity);
+        Instantiate(dragonsbody,new Vector2(-6.75f,11),Quaternion.identity);
+        Instantiate(dragonsbody,new Vector2(-7.75f,11),Quaternion.identity);
+        Instantiate(dragonsbody,new Vector2(-8.75f,11),Quaternion.identity);
+        Instantiate(dragonsbody,new Vector2(-9.75f,11),Quaternion.identity);
+        Instantiate(dragonsleg,new Vector2(-10.75f,11),Quaternion.identity);
+        Instantiate(dragonstail,new Vector2(-11.75f,11),Quaternion.identity);
     }
 
     void CreateLion() {
@@ -167,14 +198,32 @@ public class GameController : MonoBehaviour
     }
 
     public void RestartLevel() {
-       
+        GameObject[] dragonparts;
+        dragonparts = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject drag in dragonparts) {
+            drag.SetActive(false);
+        }
+        p.transform.position = new Vector2 (0,-10);
+        enemytotal = 10;
+        CreateDragon();
     }
 
     public void ChangeHealth(int amount) {
         currenthealth += amount;
         
-        if (currenthealth == 1) {
+        if (currenthealth == 0) {
             life1.SetActive(false);
+            life2.SetActive(false);
+            life3.SetActive(false);
+            life4.SetActive(false);
+            life5.SetActive(false);
+            life6.SetActive(false);
+            life7.SetActive(false);
+            life8.SetActive(false);
+            life9.SetActive(false);
+        }
+        if (currenthealth == 1) {
+            life1.SetActive(true);
             life2.SetActive(false);
             life3.SetActive(false);
             life4.SetActive(false);
@@ -272,5 +321,8 @@ public class GameController : MonoBehaviour
             life8.SetActive(true);
             life9.SetActive(true);
         }
+    }
+    void PlaySound(AudioClip sound) {
+        sounds.PlayOneShot(sound);
     }
 }

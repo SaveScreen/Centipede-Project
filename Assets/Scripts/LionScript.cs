@@ -49,6 +49,37 @@ public class LionScript : MonoBehaviour
         transform.position = defaultpos;
         anim.speed = 0.5f;
         positionnew = playerpos.transform.position;
+
+        if (g.stage >= 2) {
+            spd = 5;
+        }
+        if (g.stage >= 5) {
+            spd = 5.5f;
+        }
+        if (g.stage >= 10) {
+            spd = 6;
+        }
+        if (g.stage >= 15) {
+            spd = 7;
+        }
+        if (g.stage >= 20) {
+            spd = 8;
+        }
+        if (g.stage >= 25) {
+            spd = 10;
+        }
+        if (g.stage >= 35) {
+            spd = 12;
+        }
+        if (g.stage >= 50) {
+            spd = 15;
+        }
+        if (g.stage >= 75) {
+            spd = 17;
+        }
+        if (g.stage >= 100) {
+            spd = 20;
+        }
     }
 
     void Update() {
@@ -187,6 +218,7 @@ public class LionScript : MonoBehaviour
         if (pl != null) {
             g.ChangeHealth(-1);
             player.PlaySound(playerhurt);
+            g.RestartLevel();
             Destroy(gameObject);
         }
 

@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1127441149480468093
 Transform:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   playerpos: {fileID: 1633365335832452190, guid: 0df32b2ac2f87094892f954d58fafa5e, type: 3}
   hit: {fileID: 8300000, guid: 4db3584d2c9040143b7caa1f67fe2346, type: 3}
   spd: 4
-  playerhurt: {fileID: 8300000, guid: 8dbc06b33041291489474963e3e92b1d, type: 3}
+  playerhurt: {fileID: 8300000, guid: c441505eb22d55e41a20be683b0241b1, type: 3}
 --- !u!61 &4952100338506162694
 BoxCollider2D:
   m_ObjectHideFlags: 0

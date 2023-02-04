@@ -50,6 +50,7 @@ public class PlayerScript : MonoBehaviour
         r = gameObject.GetComponent<SpriteRenderer>();
         GameObject enemytag = GameObject.FindWithTag("Enemy");
         enemy = enemytag.GetComponent<EnemyScript>();
+        anim.speed = 0.5f;
         //timer = 0.0f;
         //timeuntilreset = 3.0f;
         

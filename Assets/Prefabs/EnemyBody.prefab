@@ -28,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4635914631702196900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.83, y: 11.09, z: 0}
+  m_LocalPosition: {x: -4.83, y: 11, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6619717012930944065
 SpriteRenderer:
@@ -99,11 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801022f06d84058418d5d9c33811cf0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.009
-  timeuntilnext: 0.1
+  speed: 3
   hitdragon: {fileID: 8300000, guid: 4db3584d2c9040143b7caa1f67fe2346, type: 3}
   dragonroar: {fileID: 0}
-  playerhurt: {fileID: 8300000, guid: 8dbc06b33041291489474963e3e92b1d, type: 3}
+  playerhurt: {fileID: 8300000, guid: c441505eb22d55e41a20be683b0241b1, type: 3}
 --- !u!50 &8055086460820458009
 Rigidbody2D:
   serializedVersion: 4
