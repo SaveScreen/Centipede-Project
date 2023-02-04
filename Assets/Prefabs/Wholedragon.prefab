@@ -39,7 +39,7 @@ Transform:
   - {fileID: 3597948589879870084}
   - {fileID: 608050978113099517}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &67616553307879926
 PrefabInstance:

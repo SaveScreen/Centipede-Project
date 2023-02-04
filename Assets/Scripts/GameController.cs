@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     public GameObject levelbg1;
     public GameObject levelbg2;
     public GameObject wholedragon;
+    public GameObject lion;
+    private LionScript l;
     public GameObject gameoverui;
     public int stage;
     private PlayerScript p;
@@ -38,6 +40,8 @@ public class GameController : MonoBehaviour
     private int extralifescore;
     private GameObject player;
     public int enemytotal;
+    private float liontimer;
+    private float timeforlion;
     //private GameObject player;
     // Start is called before the first frame update
 
@@ -48,6 +52,8 @@ public class GameController : MonoBehaviour
         p = player.GetComponent<PlayerScript>();
         dragon = GameObject.FindWithTag("Enemy");
         e = dragon.GetComponent<EnemyScript>(); 
+        GameObject liontag = GameObject.FindWithTag("Lion");
+        l = liontag.GetComponent<LionScript>();
         stage = 1;
         levelbg2.SetActive(false);
         levelbg1.SetActive(true);
@@ -64,6 +70,8 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("Hiscore",10000);
         hiscore.text = "HI-SCORE: " + PlayerPrefs.GetInt("Hiscore").ToString();
         enemytotal = 10;
+        liontimer = 0.0f;
+        timeforlion = 20.0f;
 
         //Lifecount at start of game
         life1.SetActive(true);
@@ -101,6 +109,12 @@ public class GameController : MonoBehaviour
             enemytotal = 10;
         }
 
+        liontimer += Time.deltaTime;
+        if (liontimer >= timeforlion) {
+            CreateLion();
+            liontimer = 0.0f;
+        }
+
     }
 
 
@@ -116,6 +130,10 @@ public class GameController : MonoBehaviour
     void CreateDragon() {
         Instantiate(wholedragon,new Vector2(-2.75f,11.5f),Quaternion.identity);
         
+    }
+
+    void CreateLion() {
+        Instantiate(lion, new Vector2(-10.0f,-14.0f), Quaternion.identity);
     }
 
 
