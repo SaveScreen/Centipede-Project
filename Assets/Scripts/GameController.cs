@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
     public GameObject dragonstail;
     public GameObject lion;
     private LionScript l;
-    public GameObject gameoverui;
     public int stage;
     private PlayerScript p;
     public BarrierSpawning bs;
@@ -37,6 +36,7 @@ public class GameController : MonoBehaviour
     public Text score;
     public Text hiscore;
     public GameObject gameoverscreen;
+    public GameObject youwinscreen;
     private int currentscore;
     private int maxhealth;
     private int currenthealth;
@@ -50,9 +50,9 @@ public class GameController : MonoBehaviour
     private AudioSource sounds;
     public bool gameover;
     private bool gameistrulyover;
-    //private GameObject player;
-    // Start is called before the first frame update
-
+    public AudioClip newlife;
+    public bool gamecontinue;
+    private GameObject b;
     
     void Start()
     {
@@ -66,8 +66,8 @@ public class GameController : MonoBehaviour
         stage = 1;
         levelbg2.SetActive(false);
         levelbg1.SetActive(true);
-        gameoverui.SetActive(false);
         gameoverscreen.SetActive(false);
+        youwinscreen.SetActive(false);
         currentscore = 0;
         currentscoreextralife = 0;
         //This is the score you need for an extra life.
@@ -84,6 +84,8 @@ public class GameController : MonoBehaviour
         timeforlion = 20.0f;
         gameover = false;
         gameistrulyover = false;
+        gamecontinue = false;
+        Time.timeScale = 1.0f;
         
 
         //Lifecount at start of game
@@ -114,15 +116,24 @@ public class GameController : MonoBehaviour
         if (gameover == false) {
             if (currenthealth <= 0) {
                 gameover = true;
+                
             }
         }
         if (gameover == true) {
             if (gameistrulyover == true) {
+                Time.timeScale = 0.0f;
+            } else {
+                gameoverscreen.SetActive(true);
+                PlaySound(gameoversound);
+                gameistrulyover = true;
+            }
+            /*
+            if (gameistrulyover == true) {
                 //There's nothing left to do.
             } else {
-                 currenthealth = 0;
+                /*
+                currenthealth = 0;
                 player.SetActive(false);
-                gameoverui.SetActive(true);
                 gameoverscreen.SetActive(true);
                 GameObject[] dragonparts;
                 dragonparts = GameObject.FindGameObjectsWithTag("Enemy");
@@ -132,12 +143,11 @@ public class GameController : MonoBehaviour
                 lion.SetActive(false);
                 PlaySound(gameoversound);
                 gameistrulyover = true;
-            }
-           
+                }
+            } 
+            */
         }
         
-        
-
          //Go to next level
         if (enemytotal < 1) {
             ChangeLevel(1);
@@ -151,18 +161,50 @@ public class GameController : MonoBehaviour
             liontimer = 0.0f;
         }
 
-
-       
+        if (gamecontinue == true) {
+            ChangeLevel(1);
+            
+        }
+        //YOU WIN
+        /*
+        if (stage == 3) {
+            if (gamecontinue == false) {
+                youwinscreen.SetActive(true);
+                Time.timeScale = 0.0f;
+            } else {
+                youwinscreen.SetActive(false);
+                Time.timeScale = 1.0f;
+            }    
+        }
+        */
 
     }
 
 
     public void ChangeLevel(int level) {
-        stage += level;
-        ChangeScore(1000);
-        bs.amount = 5;
-        bs.Generate();
-        CreateDragon();
+        //YOU WIN SCREEN ONLY
+        if (stage == 2) {
+            if (gamecontinue == false) {
+                youwinscreen.SetActive(true);
+                Time.timeScale = 0.0f;
+            } else {
+                youwinscreen.SetActive(false);
+                Time.timeScale = 1.0f;
+                stage += level;
+                ChangeScore(1000);
+                bs.amount = 5;
+                bs.Generate();
+                CreateDragon();
+                gamecontinue = false;
+            } 
+        } else {
+            stage += level;
+            ChangeScore(1000);
+            bs.amount = 5;
+            bs.Generate();
+            CreateDragon();
+        }
+        
     }
 
 
@@ -227,6 +269,9 @@ public class GameController : MonoBehaviour
 
     public void ChangeHealth(int amount) {
         currenthealth += amount;
+        if (amount >= 1) {
+            p.PlaySound(newlife);
+        }
         
         if (currenthealth == 0) {
             life1.SetActive(false);

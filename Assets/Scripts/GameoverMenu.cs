@@ -5,15 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class GameoverMenu : MonoBehaviour
 {
-    public void PlayAgain()
-  {
-    SceneManager.LoadScene("Level1");
+  private GameObject game;
+  private GameController g;
+
+  void Start () {
+    game = GameObject.FindWithTag("GameController");
+    g = game.GetComponent<GameController>();
   }
+
+    public void PlayAgain()
+    {
+      SceneManager.LoadScene("Level1");
+    }
+
     public void EndGame() {
         Application.Quit();
     }
+
     public void BackToMainMenu() {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Continue() {
+      g.gamecontinue = true;
+      
     }
 
 }
