@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     public GameObject life9;
     public Text score;
     public Text hiscore;
+    public GameObject gameoverscreen;
     private int currentscore;
     private int maxhealth;
     private int currenthealth;
@@ -47,7 +48,8 @@ public class GameController : MonoBehaviour
     private float timeforlion;
     public AudioClip gameoversound;
     private AudioSource sounds;
-    private bool gameover;
+    public bool gameover;
+    private bool gameistrulyover;
     //private GameObject player;
     // Start is called before the first frame update
 
@@ -65,6 +67,7 @@ public class GameController : MonoBehaviour
         levelbg2.SetActive(false);
         levelbg1.SetActive(true);
         gameoverui.SetActive(false);
+        gameoverscreen.SetActive(false);
         currentscore = 0;
         currentscoreextralife = 0;
         //This is the score you need for an extra life.
@@ -80,6 +83,7 @@ public class GameController : MonoBehaviour
         liontimer = 0.0f;
         timeforlion = 20.0f;
         gameover = false;
+        gameistrulyover = false;
         
 
         //Lifecount at start of game
@@ -109,8 +113,17 @@ public class GameController : MonoBehaviour
         //GAME OVER
         if (gameover == false) {
             if (currenthealth <= 0) {
+                gameover = true;
+            }
+        }
+        if (gameover == true) {
+            if (gameistrulyover == true) {
+                //There's nothing left to do.
+            } else {
+                 currenthealth = 0;
                 player.SetActive(false);
                 gameoverui.SetActive(true);
+                gameoverscreen.SetActive(true);
                 GameObject[] dragonparts;
                 dragonparts = GameObject.FindGameObjectsWithTag("Enemy");
                 foreach (GameObject drag in dragonparts) {
@@ -118,9 +131,11 @@ public class GameController : MonoBehaviour
                 }
                 lion.SetActive(false);
                 PlaySound(gameoversound);
-                gameover = true;
+                gameistrulyover = true;
             }
+           
         }
+        
         
 
          //Go to next level
@@ -132,6 +147,7 @@ public class GameController : MonoBehaviour
         liontimer += Time.deltaTime;
         if (liontimer >= timeforlion) {
             CreateLion();
+            lion.SetActive(true);
             liontimer = 0.0f;
         }
 
@@ -164,6 +180,7 @@ public class GameController : MonoBehaviour
     }
 
     void CreateLion() {
+        lion.SetActive(true);
         Instantiate(lion, new Vector2(-10.0f,-14.0f), Quaternion.identity);
     }
 

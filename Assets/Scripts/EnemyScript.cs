@@ -30,7 +30,7 @@ public class EnemyScript : MonoBehaviour
     {
         enemydirection = gameObject.GetComponent<SpriteRenderer>();
         enemydirection.flipX = true;
-        speed = 4.0f;
+        speed = 8.0f;
         phase = 0;
         
         soundtimer = 0.0f;
@@ -42,34 +42,34 @@ public class EnemyScript : MonoBehaviour
         g = gctag.GetComponent<GameController>();
         
         if (g.stage >= 2) {
-            speed = 4;
+            speed = 9;
         }
         if (g.stage >= 5) {
-            speed = 5;
-        }
-        if (g.stage >= 10) {
-            speed = 7;
-        }
-        if (g.stage >= 15) {
             speed = 10;
         }
-        if (g.stage >= 20) {
-            speed = 13;
+        if (g.stage >= 10) {
+            speed = 12;
         }
-        if (g.stage >= 25) {
+        if (g.stage >= 15) {
             speed = 15;
         }
+        if (g.stage >= 20) {
+            speed = 18;
+        }
+        if (g.stage >= 25) {
+            speed = 24;
+        }
         if (g.stage >= 35) {
-            speed = 20;
-        }
-        if (g.stage >= 50) {
-            speed = 25;
-        }
-        if (g.stage >= 75) {
             speed = 30;
         }
+        if (g.stage >= 50) {
+            speed = 36;
+        }
+        if (g.stage >= 75) {
+            speed = 42;
+        }
         if (g.stage >= 100) {
-            speed = 40;
+            speed = 50;
         }
         
     }

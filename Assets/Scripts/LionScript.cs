@@ -54,31 +54,31 @@ public class LionScript : MonoBehaviour
             spd = 5;
         }
         if (g.stage >= 5) {
-            spd = 5.5f;
-        }
-        if (g.stage >= 10) {
             spd = 6;
         }
-        if (g.stage >= 15) {
-            spd = 7;
-        }
-        if (g.stage >= 20) {
+        if (g.stage >= 10) {
             spd = 8;
         }
-        if (g.stage >= 25) {
-            spd = 10;
-        }
-        if (g.stage >= 35) {
+        if (g.stage >= 15) {
             spd = 12;
         }
+        if (g.stage >= 20) {
+            spd = 16;
+        }
+        if (g.stage >= 25) {
+            spd = 22;
+        }
+        if (g.stage >= 35) {
+            spd = 28;
+        }
         if (g.stage >= 50) {
-            spd = 15;
+            spd = 34;
         }
         if (g.stage >= 75) {
-            spd = 17;
+            spd = 40;
         }
         if (g.stage >= 100) {
-            spd = 20;
+            spd = 50;
         }
     }
 

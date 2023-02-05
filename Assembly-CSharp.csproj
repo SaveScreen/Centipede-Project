@@ -38,8 +38,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\EnemyScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\GameoverMenu.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\BarrierSpawning.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\BarrierScript.cs" />
      <Compile Include="Assets\Scripts\LionScript.cs" />
      <Compile Include="Assets\Scripts\BulletScript.cs" />

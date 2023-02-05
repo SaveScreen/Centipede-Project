@@ -30,7 +30,6 @@ public class PlayerScript : MonoBehaviour
     private AudioSource sounds;
     public AudioClip hurt;
     private SpriteRenderer r;
-
     //DO NOT TOUCH IN INSPECTOR
     public bool dead;
     //private float timer;
@@ -66,7 +65,6 @@ public class PlayerScript : MonoBehaviour
     }
 
     void Update() {
-        //if not dead, move player and stuff
             //For moving the player
             move = PlayerController.ReadValue<Vector2>();
             //For firing arrows
@@ -81,7 +79,10 @@ public class PlayerScript : MonoBehaviour
             //Restarts the game
             if (Input.GetKeyDown(KeyCode.R)) {
                 //SceneManager.LoadScene("Level1");
-                SceneManager.GetActiveScene();
+                SceneManager.LoadScene("MainMenu");
+            }
+            if (Input.GetKeyDown(KeyCode.P)) {
+                gamecontrol.gameover = true;
             }
 
             //For debug purposes. Exits the game
